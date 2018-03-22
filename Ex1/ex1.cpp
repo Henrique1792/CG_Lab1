@@ -45,9 +45,12 @@ int main(int argc, char *argv[]){
         
         //Setting display
         glutDisplayFunc(display);
+        //Setting keyboard events
         glutKeyboardFunc(regkeyPressed);
         glutSpecialFunc(specKeyPressed);
 
+        //Setting mouse events
+        glutMouseFunc(mouseClickAction);
 
         glutMainLoop();
 
@@ -85,26 +88,24 @@ void regkeyPressed(GLubyte key, GLint x, GLint y){
        }
 }
 void specKeyPressed(GLint key, GLint x, GLint y){
-        switch(key){
-        case GLUT_LEFT_BUTTON:
+        if(key==GLUT_KEY_LEFT)
                 std::cout << "5 degress counter-clockwise Rotation\n";
-                break;
-        case GLUT_RIGHT_BUTTON:
+        else{
+                if(key==GLUT_KEY_RIGHT)
                 std::cout << "5 degress clockwise Rotation\n";
-                break;
         }
-
-
-
 }
 
+/*
+ * mouse events deal
+ * */
 void mouseClickAction(GLint button,GLint action, GLint x, GLint y){
-        if(action == GLUT_DOWN && action==GLUT_LEFT_BUTTON){
-                //draw dot at x,y 
-        }
-
-        if(action == GLUT_DOWN && action==GLUT_RIGHT_BUTTON){
-                //draw dot at x,y 
+        switch(button){
+                case GLUT_LEFT_BUTTON:
+                        std::cout << "Translate drawing at "<<x<<" "<<y<<"\n";
+                        break;
+                case GLUT_RIGHT_BUTTON:
+                        std::cout << "Create submenu on right click\n";
         }
 }
 
