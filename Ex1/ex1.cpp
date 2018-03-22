@@ -1,10 +1,11 @@
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <GL/glut.h>
 
 /*
  * Henrique F. M. Freitas - 8937225.
- * Ex: Set DDR algorithm for creating lines using dots.
+ * Ex: Set DDR algorithm for creating lines,circles,elipses and triangles using dots.
  *
  * Rotations, translations just permitted with Matrix Operations
  *
@@ -18,7 +19,11 @@ GLint WINDOW_WIDTH=600,
         WINDOW_HEIGHT=600;
 
 //Starting up Directives
-void init();
+void init(){
+        glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+        glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+        gluOrtho2D(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT);
+}
 void display();
 
 //Mouse Directives
@@ -32,15 +37,16 @@ void specKeyPressed(GLint key, GLint x, GLint y);
 void keyUp(GLint key, GLint x, GLint y);
 
 //Menu Directives
-void rightClickMenu_Content(GLint item_number);
-void rightClickMenu();
+void rMenu();
+void faceMenu(GLint itemNumber);
 
 int main(int argc, char *argv[]){
-        //Setting Window
+        GLint screen_width, screen_height;
         glutInit(&argc, argv);
-        glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-        glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
-        glutInitWindowPosition(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+        init();
+        screen_width  = glutGet(GLUT_SCREEN_WIDTH),
+        screen_height = glutGet(GLUT_SCREEN_HEIGHT);  
+        glutInitWindowPosition((screen_width - WINDOW_WIDTH)/2, (screen_height - WINDOW_HEIGHT)/2);
         glutCreateWindow("Ex1");
         
         //Setting display
@@ -51,7 +57,8 @@ int main(int argc, char *argv[]){
 
         //Setting mouse events
         glutMouseFunc(mouseClickAction);
-
+        //Setting right click menu
+        rMenu();
         glutMainLoop();
 
 
@@ -64,7 +71,7 @@ int main(int argc, char *argv[]){
  * */
 
 void display(){
-        glClearColor(0.0, 0.0, 0.0, 0.0); // set background color
+        glClearColor(1.0, 1.0, 1.0, 1.0); // set background color
         glClear(GL_COLOR_BUFFER_BIT); //reset color buffer
         glLoadIdentity(); //Load Identity matrix to reset drawing locations
 
@@ -109,5 +116,29 @@ void mouseClickAction(GLint button,GLint action, GLint x, GLint y){
         }
 }
 
+/*
+ * Submenu construction
+ *
+ * */
+void faceMenu(GLint itemNumber){
+
+        std::cout<<"Item "<<itemNumber<<" \n";
+        glutPostRedisplay();
+}
+void drawString(char *s){
+        unsigned int i;
+
+        for(i=0;i<strlen(s);i++)
+                glutBitmapCharacter (GLUT_BITMAP_HELVETICA_10, s[i]); 
 
 
+}
+void rMenu(){
+        GLint id=glutCreateMenu(faceMenu);
+        glutAddMenuEntry("Linha", 1);
+        glutAddMenuEntry("Triângulo", 2);
+        glutAddMenuEntry("Círculo", 3);
+        glutAddMenuEntry("Elipse", 4);
+        
+        glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
