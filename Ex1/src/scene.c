@@ -9,8 +9,10 @@ int extern xMenu, yMenu;
 
 
 //global Variable
-int receiveDOTS=0;
-DOT  p1, p2;
+int extern receiveDOTS;
+eMode extern currentMode;
+
+
 /*
  * drawing
  *
@@ -22,24 +24,24 @@ void drawLoop(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//Drawing Menu Options
 	glPushMatrix();
-	switch(menuOption){
-		case(1):
+	switch(currentMode){
+		case(DRAW_LINE):
 			drawLine();
 			break;
-		case(2):
+		case(DRAW_TRIANGLE):
 			/*drawTriangle();*/
 			break;
-		case(3):
+		case(DRAW_SQUARE):
 			/*drawSquare();*/
 			break;
-		case(4):
+		case(DRAW_CIRCLE):
 			/*drawCircle();*/
 			break;
-		case(5):
+		case(DRAW_ELIPTIC):
 			/*drawEliptic();*/
 			break;
-		default:
-			; //NOP, but we'll set values here for transform if object exists
+		case(IDLE):
+			printf("waiting selection...\n");
 	}
 	menuOption=0;
 	glPopMatrix();
@@ -51,8 +53,8 @@ void drawLoop(){
  *
 */
 void menuSkeleton(int Item){
-	if(Item!=0){
-		menuOption=Item;
+	if(Item!=IDLE){
+		currentMode=Item;
 		printf("Selected: %d\n",Item);
 		receiveDOTS=1;
 	}
@@ -72,16 +74,21 @@ void menuSkeleton(int Item){
 
 void menuCreation(){
 	int menid=glutCreateMenu(menuSkeleton);
-	glutAddMenuEntry("Linha",1);
-	glutAddMenuEntry("Triangulo",2);
-	glutAddMenuEntry("Quadrado",3);
-	glutAddMenuEntry("Circulo",4);
-	glutAddMenuEntry("Elipse",5);
+	glutAddMenuEntry("Linha",DRAW_LINE);
+	glutAddMenuEntry("Triangulo",DRAW_TRIANGLE);
+	glutAddMenuEntry("Quadrado",DRAW_SQUARE);
+	glutAddMenuEntry("Circulo",DRAW_CIRCLE);
+	glutAddMenuEntry("Elipse",DRAW_ELIPTIC);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON); 
 }
 
 void drawLine(){
+	int x1, y1;
+	if(receiveDOTS){
+		x1=xMouse, y1=yMouse;
+		printf("Initial point: %d %d\n", x1, y1);
+	}
 
 }
 
