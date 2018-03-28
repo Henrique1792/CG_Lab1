@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "../include/scene.h"
+#include "../include/events.h"
 #include "../include/settings.h"
 
 
@@ -13,7 +14,7 @@
 */
 
 int menuOption=0;
-GLint xMouse, yMouse;
+int xMouse, yMouse;
 
 //init function
 
@@ -35,8 +36,8 @@ int main(int argc, char *argv){
 	init();
 	IF_DEBUG printf("Window Created\n");
 	
-		//set callbacks
-		//drawing
+	//set callbacks
+	//drawing
 		glutDisplayFunc(drawLoop);
 	IF_DEBUG printf("Draw callback set\n");
 		
@@ -53,7 +54,9 @@ int main(int argc, char *argv){
 		glMatrixMode(GL_VIEWPORT);
 		glViewport(0,0,VIEWPORT_X,VIEWPORT_Y);
 		gluOrtho2D(-ORTHO_X,ORTHO_X,-ORTHO_Y,ORTHO_Y);
+
 		IF_DEBUG printf("matrix viewport set up\n");
+		glMatrixMode(GL_MODELVIEW);
 		
 		glutMainLoop();
 	return 0;

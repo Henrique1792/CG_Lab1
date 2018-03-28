@@ -7,11 +7,17 @@
 #include "../include/settings.h"
 
 
+typedef struct DOT{
+	int x, y;
+}DOT;
 
 void drawLoop();
-void onClick(int x, int y, int action,int button); 
-void keyPressed(unsigned char key, int x, int y);
 void menuCreation();
+void drawLine();
+void drawTriangle();
+void drawSquare();
+void drawCircle();
+void drawEliptic();
 
 
 

@@ -1,4 +1,4 @@
-c = gcc
+CC= gcc
 SRC1 = ./Ex1/src/*.c
 SRC2 = ./Ex2/src/*.c
 SRC3 = ./Ex3/src/*.c
@@ -13,12 +13,13 @@ LIBS = -lGL -lglut -lGLU
 all: Ex1 Ex2 Ex3
 	echo Done
 
-Ex1:
-	@$(c) $(SRC1) -o $(OUTPUT1) $(LIBS)
+Ex1: 
+	$(CC) $(SRC1) -o $(OUTPUT1) $(LIBS)
 Ex2:
-	@$(c) $(SRC2) -o $(OUTPUT2) $(LIBS)
+	$(CC) $(SRC2) -o $(OUTPUT2) $(LIBS)
+
 Ex3:
-	@$(c) $(SRC3) -o $(OUTPUT3) $(LIBS)
+	$(CC) $(SRC3) -o $(OUTPUT3) $(LIBS)
 
 run1:
 	$(OUTPUT1)
@@ -28,5 +29,6 @@ run2:
 
 run3:
 	$(OUTPUT3)
+
 clean:
 	rm -rf $(SRCS:.c=.o) $(EXE)
