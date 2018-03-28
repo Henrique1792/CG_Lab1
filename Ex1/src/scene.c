@@ -5,6 +5,11 @@
 
 int extern menuOption;
 int extern xMouse, yMouse;
+int extern xMenu, yMenu;
+
+
+//global Variable
+int receiveDOTS=0;
 DOT  p1, p2;
 /*
  * drawing
@@ -13,7 +18,7 @@ DOT  p1, p2;
 void drawLoop(){
 	//Load background color and object color
 	glClearColor(1.0,1.0,1.0,0.0);
-	glColor3f(1.0,1.0,1.0);
+	glColor3f(0.0,0.0,0.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//Drawing Menu Options
 	glPushMatrix();
@@ -34,10 +39,10 @@ void drawLoop(){
 			/*drawEliptic();*/
 			break;
 		default:
-			; //NOP
+			; //NOP, but we'll set values here for transform if object exists
 	}
+	menuOption=0;
 	glPopMatrix();
-	glFlush();
 	glutSwapBuffers();
 }
 /*
@@ -49,9 +54,9 @@ void menuSkeleton(int Item){
 	if(Item!=0){
 		menuOption=Item;
 		printf("Selected: %d\n",Item);
+		receiveDOTS=1;
 	}
 	else{
-		menuOption=0;
 		printf("No option selected\n");
 	}
 
@@ -59,7 +64,8 @@ void menuSkeleton(int Item){
 }
 
 /*
- * Menu Structure - Creation
+ * m
+ * Menu Structure - trigger Creation
  *
  *
 */
@@ -76,9 +82,6 @@ void menuCreation(){
 }
 
 void drawLine(){
-	printf("Initial DOT: %d %d\n",x1,y1);
-	printf("Final DOT: %d %d\n",x2,y2);
-
 
 }
 
