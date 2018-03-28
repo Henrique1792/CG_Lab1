@@ -1,7 +1,7 @@
-CPP = g++
-SRC1 = ./Ex1/src/*.cpp
-SRC2 = ./Ex2/src/*.cpp
-SRC3 = ./Ex3/src/*.cpp
+c = gcc
+SRC1 = ./Ex1/src/*.c
+SRC2 = ./Ex2/src/*.c
+SRC3 = ./Ex3/src/*.c
 SRCS = $(SRC1) $(SRC2) $(SRC3)
 OUTPUT1 = ./Ex1/ex1
 OUTPUT2 = ./Ex2/ex2
@@ -14,11 +14,11 @@ all: Ex1 Ex2 Ex3
 	echo Done
 
 Ex1:
-	@$(CPP) $(SRC1) -o $(OUTPUT1) $(LIBS)
+	@$(c) $(SRC1) -o $(OUTPUT1) $(LIBS)
 Ex2:
-	@$(CPP) $(SRC2) -o $(OUTPUT2) $(LIBS)
+	@$(c) $(SRC2) -o $(OUTPUT2) $(LIBS)
 Ex3:
-	@$(CPP) $(SRC3) -o $(OUTPUT3) $(LIBS)
+	@$(c) $(SRC3) -o $(OUTPUT3) $(LIBS)
 
 run1:
 	$(OUTPUT1)
@@ -29,4 +29,4 @@ run2:
 run3:
 	$(OUTPUT3)
 clean:
-	rm -rf $(SRCS:.cpp=.o) $(EXE)
+	rm -rf $(SRCS:.c=.o) $(EXE)
