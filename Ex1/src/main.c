@@ -38,9 +38,6 @@ int main(int argc, char *argv){
 	IF_DEBUG printf("Window Created\n");
 	
 	//set callbacks
-	//drawing
-		glutDisplayFunc(drawLoop);
-	IF_DEBUG printf("Draw callback set\n");
 		
 		//mouseClick
 		glutMouseFunc(onClick);
@@ -50,6 +47,9 @@ int main(int argc, char *argv){
 		//keyboard
 		/*glutKeyboardFunc(keyPressed);*/
 	/*IF_DEBUG printf("Keyboard callback set\n");*/
+	//drawing
+		glutDisplayFunc(drawLoop);
+	IF_DEBUG printf("Draw callback set\n");
 
 		//set Matrix Mode
 		glMatrixMode(GL_VIEWPORT);
