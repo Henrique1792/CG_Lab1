@@ -14,4 +14,16 @@
 
 #define ORTHO_X 300
 #define ORTHO_Y 300
+typedef  enum eMode{
+	DRAW_LINE,
+	DRAW_TRIANGLE,
+	DRAW_SQUARE,
+	DRAW_CIRCLE,
+	DRAW_ELIPTIC,
+	DRAW_IDLE
+}eMode;
+
+typedef struct DOT{
+	int x, y;
+}DOT;
 #endif

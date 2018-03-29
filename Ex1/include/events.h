@@ -10,5 +10,7 @@
 
 void onClick(int bt, int state, int x, int y);
 void keyPressed(unsigned char key, int x, int y);
+void initDots();
+void freeDots();
 
 #endif

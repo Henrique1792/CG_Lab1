@@ -6,10 +6,9 @@
 int extern menuOption;
 int extern xMouse, yMouse;
 int extern xMenu, yMenu;
-
+DOT extern *p1, *p2;
 
 //global Variable
-int extern receiveDOTS;
 eMode extern currentMode;
 
 
@@ -17,13 +16,11 @@ eMode extern currentMode;
  * drawing
  *
 */
-void drawLoop(){
-	//Load background color and object color
-	glClearColor(1.0,1.0,1.0,0.0);
-	glColor3f(0.0,0.0,0.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void drawShapes(){
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
 	//Drawing Menu Options
-	glPushMatrix();
 	switch(currentMode){
 		case(DRAW_LINE):
 			drawLine();
@@ -40,11 +37,18 @@ void drawLoop(){
 		case(DRAW_ELIPTIC):
 			/*drawEliptic();*/
 			break;
-		case(IDLE):
+		case(DRAW_IDLE):
 			printf("waiting selection...\n");
+			break;
 	}
-	menuOption=0;
-	glPopMatrix();
+	currentMode=DRAW_IDLE;
+}
+void drawLoop(){
+	//Load background color and object color
+	glClearColor(1.0,1.0,1.0,0.0);
+	glColor3f(0.0,0.0,0.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	drawShapes();
 	glutSwapBuffers();
 }
 /*
@@ -53,10 +57,9 @@ void drawLoop(){
  *
 */
 void menuSkeleton(int Item){
-	if(Item!=IDLE){
+	if(Item!=DRAW_IDLE){
 		currentMode=Item;
 		printf("Selected: %d\n",Item);
-		receiveDOTS=1;
 	}
 	else{
 		printf("No option selected\n");
@@ -84,11 +87,7 @@ void menuCreation(){
 }
 
 void drawLine(){
-	int x1, y1;
-	if(receiveDOTS){
-		x1=xMouse, y1=yMouse;
-		printf("Initial point: %d %d\n", x1, y1);
-	}
+	printf("Initial point: %d %d\n", p1->x, p1->y);
 
 }
 

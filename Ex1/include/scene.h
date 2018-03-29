@@ -7,9 +7,6 @@
 #include "../include/settings.h"
 
 
-typedef struct DOT{
-	int x, y;
-}DOT;
 
 void drawLoop();
 void menuCreation();

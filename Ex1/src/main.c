@@ -14,8 +14,9 @@
 */
 
 int menuOption=0;
-int xMouse, yMouse;
-
+int xMouse, yMouse, sMouse;
+eMode currentMode=DRAW_IDLE;
+DOT *p1, *p2;
 //init function
 
 void init(){
@@ -58,7 +59,9 @@ int main(int argc, char *argv){
 		IF_DEBUG printf("matrix viewport set up\n");
 		glMatrixMode(GL_MODELVIEW);
 		
+		initDots();
 		glutMainLoop();
+		freeDots();
 	return 0;
 
 }
