@@ -3,7 +3,10 @@
 //Extern variables
 int extern xMouse,yMouse, sMouse;
 eMode extern menuOption;
-DOT extern *p1, *p2;
+DOT extern *p1, *p2, *p3, *p4;
+eMode extern currentMode;
+int lockP1=0, lockP2=0, lockP3=0, lockP4=0; 
+int menuOpen=0;
 /*
  * Events - Mouse
  *
@@ -12,42 +15,41 @@ DOT extern *p1, *p2;
 void initDots(){
 	p1=(DOT *)malloc(sizeof(DOT));
 	p2=(DOT *)malloc(sizeof(DOT));
+	p3=(DOT *)malloc(sizeof(DOT));
+	p4=(DOT *)malloc(sizeof(DOT));
 	p1->x=0, p1->y=0;
+	p2->x=0, p2->y=0;
+	p3->x=0, p3->y=0;
+	p4->x=0, p4->y=0;
 }
 
 void freeDots(){
 	free(p1);
 	free(p2);
+	free(p3);
+	free(p4);
 }
 
-eMode extern currentMode;
-int menuOpen=0;
 void onClick(int bt, int state, int x, int y){
-	if(bt==GLUT_RIGHT_BUTTON && state==GLUT_DOWN){
-		if(!menuOpen){
-			menuOpen=0;
+	if(bt==GLUT_LEFT_BUTTON && state==GLUT_DOWN ){
+		if(!lockP1){
+			p1->x=x;
+			p1->y=y;
+			lockP1=1;
 		}else{
-			menuOpen=1;
+			if(menuOption==DRAW_LINE && !lockP2){
+				p2->x=x;
+				p2->y=y;
+				lockP1=0;
+				lockP2=1;
+				drawLine(p1,p2); 
+			}
 		}
-	}
-	if(bt==GLUT_LEFT_BUTTON && state==GLUT_DOWN && menuOpen){
-		xMouse=x, yMouse=y;
-		switch(menuOption){
-			case(DRAW_LINE):
-				p1->x=xMouse, p1->y=yMouse;
-				printf("P1: %d %d\n", p1->x, p1->y);
-				break;
-		}
-		
+		glutSwapBuffers();
 	}
 }
 
 void OnMouseMove(int x, int y) {
-	if(sMouse==GLUT_DOWN) {
-		p2->x = x;
-		p2->y=VIEWPORT_Y-y;
-		glutPostRedisplay();
-	}
 }
 /*
  * Events - Keyboard
