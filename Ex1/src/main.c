@@ -29,7 +29,6 @@ void init(){
 	glViewport(0,0,VIEWPORT_X,VIEWPORT_Y);
 	gluOrtho2D(0,ORTHO_X, 0,ORTHO_Y);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 	currentMode=drawLINE;
 }
 
