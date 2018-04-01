@@ -1,10 +1,17 @@
-#include "../include/mouse.h"
-
+#include "../include/mouse.h" 
 
 
 void menuSkeleton(int itemValue){
-	if(itemValue>0)
-		printf("selected: %d\n",itemValue);
+	switch(itemValue){
+		case(drawLINE):
+		case(drawTRI):
+		case(drawSQR):
+		case(drawCIR):
+		case(drawELI):
+			printf("selected: %d\n",itemValue);
+			currentMode=itemValue;
+		break;
+	}
 	glutPostRedisplay();
 }
 void rMenu(){
@@ -24,6 +31,7 @@ void onClick(int bt, int state, int x, int y){
 	switch(currentMode){
 		case(drawLINE):
 		case(drawTRI):
+		case(drawSQR):
 			if(bt==GLUT_LEFT_BUTTON && sMouse==GLUT_DOWN){
 					p1->x=xMouse, p1->y=VIEWPORT_Y-yMouse;
 					printf("Click: %d, %d\n", p1->x, p1->y);
@@ -41,10 +49,15 @@ void onDrag(int x, int y){
 	switch(currentMode){
 		case(drawLINE):
 		case(drawTRI):
+		case(drawSQR):
 			if(bMouse==GLUT_LEFT_BUTTON && dragging){
 					p2->x=x-oldX, p2->y=VIEWPORT_Y-y-oldY;
-					lockLine=1;
-					lockTri=1;
+					if(currentMode==drawLINE)
+						lockLine=1;
+					if(currentMode==drawTRI)
+						lockTri=1;
+					if(currentMode==drawSQR)
+						lockSqr=1;
 			}
 			break;
 			

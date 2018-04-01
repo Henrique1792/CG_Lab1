@@ -23,8 +23,8 @@ void freeDots(){
 	free(p3);
 	free(p4);
 }
-void init(){
 
+void init(){
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(VIEWPORT_X, VIEWPORT_Y);
 	glutInitWindowPosition((SCREEN_SIZEX-VIEWPORT_X)/2, (SCREEN_SIZEY-VIEWPORT_Y)/2);
@@ -37,7 +37,6 @@ void init(){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	rMenu();
-
 }
 
 
@@ -45,7 +44,6 @@ int main(int argc, char *argv[]){
 	initDots();
 	lockLine=0;
 	lockTri=0;
-	currentMode=drawLINE;
 	glutInit(&argc, argv);
 	init();
 	printf("Window Created\n");

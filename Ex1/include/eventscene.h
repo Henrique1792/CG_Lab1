@@ -25,6 +25,7 @@ void cleanScreen();
 */
 void drawLine(DOT *p1, DOT *p2);
 void drawTri(DOT *p1, DOT *p2);
+void drawSqr(DOT *p1, DOT *p2);
 
 
 /*

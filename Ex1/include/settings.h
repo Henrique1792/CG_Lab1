@@ -23,9 +23,9 @@ typedef enum dMode{
 	drawIDLE,
 	drawLINE,
 	drawTRI,
-	drawSQUA,
-	drawCIRC,
-	drawELIP 
+	drawSQR,
+	drawCIR,
+	drawELI 
 }dMode;
 
 typedef struct DOT{
@@ -40,7 +40,7 @@ typedef struct DOT{
 
 dMode currentMode;
 int xMouse, yMouse, sMouse,bMouse;
-int lockP1, lockLine, lockTri;
+int lockP1, lockLine, lockTri, lockSqr;
 int dragging;
 DOT *p1, *p2, *p3, *p4;
 
