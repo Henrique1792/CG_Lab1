@@ -5,5 +5,6 @@
 void menuSkeleton(int itemValue);
 void rMenu();
 void onDrag(int x, int y);
+void onClick(int bt, int state, int x, int y);
 
 #endif

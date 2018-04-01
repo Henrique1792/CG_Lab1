@@ -18,23 +18,12 @@ void cleanScreen(){
 void display(){
 	cleanScreen();
 	glPushMatrix();
-	switch(currentMode){
-		case(drawLINE):
-			if(lockLine)
-				drawLine(p1, p2);
-			break;
-		case(drawTRI):
-			break;
-		case(drawSQUA):
-			break;
-		case(drawCIRC):
-			break;
-		case(drawELIP):
-			break;
-		case(drawIDLE):
-			printf("nothing/transform\n");
-			break;
-	}
+
+	if(currentMode==drawLINE && lockLine)
+		drawLine(p1, p2);
+	else if(currentMode==drawTRI && lockTri)
+		drawTri(p1, p2);
+
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -80,4 +69,8 @@ void drawLine(DOT *p1, DOT *p2){
 	}
 	glEnd();
 	glFlush();
+}
+void drawTri(DOT *p1, DOT *p2){
+	printf("calling drawTRI\n");
+	
 }

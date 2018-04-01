@@ -15,6 +15,7 @@ void setDots();
  *
 */
 void display();
+void reshape(int w, int h);
 void cleanScreen();
 
 /*
@@ -23,7 +24,7 @@ void cleanScreen();
  *
 */
 void drawLine(DOT *p1, DOT *p2);
-void reshape(int w, int h);
+void drawTri(DOT *p1, DOT *p2);
 
 
 /*
@@ -32,6 +33,5 @@ void reshape(int w, int h);
  *
 */
 
-void onClick(int bt, int state, int x, int y);
 
 #endif

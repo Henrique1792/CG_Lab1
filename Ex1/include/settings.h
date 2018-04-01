@@ -40,9 +40,9 @@ typedef struct DOT{
 
 dMode currentMode;
 int xMouse, yMouse, sMouse,bMouse;
-int lockP1, lockLine;
+int lockP1, lockLine, lockTri;
 int dragging;
-DOT *p1, *p2;
+DOT *p1, *p2, *p3, *p4;
 
 /*
  * inits

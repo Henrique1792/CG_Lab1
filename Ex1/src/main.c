@@ -2,24 +2,26 @@
 #include "../include/eventscene.h"
 #include "../include/mouse.h"
 
-DOT extern *p1, *p2;
-dMode extern currentMode;
-
-
 
 void initDots(){
 	p1=(DOT *)malloc(sizeof(DOT));
 	p2=(DOT *)malloc(sizeof(DOT));
+	p3=(DOT *)malloc(sizeof(DOT));
+	p4=(DOT *)malloc(sizeof(DOT));
 	
 }
 
 void setDots(){
 	p1->x=0, p1->y=0;
 	p2->x=0, p2->y=0;
+	p3->x=0, p3->y=0;
+	p4->x=0, p4->y=0;
 }
 void freeDots(){
 	free(p1);
 	free(p2);
+	free(p3);
+	free(p4);
 }
 void init(){
 
@@ -42,6 +44,7 @@ void init(){
 int main(int argc, char *argv[]){
 	initDots();
 	lockLine=0;
+	lockTri=0;
 	currentMode=drawLINE;
 	glutInit(&argc, argv);
 	init();
