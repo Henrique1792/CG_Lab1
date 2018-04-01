@@ -8,6 +8,7 @@
  *
 */
 void display();
+void cleanScreen();
 
 /*
  *
@@ -15,6 +16,7 @@ void display();
  *
 */
 void drawLine(DOT *p1, DOT *p2);
+void reshape(int w, int h);
 
 
 /*

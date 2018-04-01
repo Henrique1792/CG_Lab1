@@ -2,6 +2,7 @@
 #define SETTINGS_H_
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <GL/glut.h>
 
 /*
@@ -15,7 +16,7 @@
 #define SCREEN_SIZEY 768
 #define VIEWPORT_X 800
 #define VIEWPORT_Y 600
-#define ORTHO_X 300
+#define ORTHO_X 400
 #define ORTHO_Y 300
 
 typedef enum dMode{
@@ -26,8 +27,9 @@ typedef enum dMode{
 	drawCIRC,
 	drawELIP 
 }dMode;
+
 typedef struct DOT{
-	float x, y;
+	int x, y;
 
 }DOT;
 /*
@@ -39,11 +41,5 @@ typedef struct DOT{
 dMode currentMode;
 int xMouse, yMouse, sMouse, lockP1;
 DOT *p1, *p2;
-
-/*
- * inits
- *
-*/
-
 
 #endif

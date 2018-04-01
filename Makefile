@@ -8,7 +8,7 @@ OUTPUT2 = ./Ex2/ex2
 OUTPUT3 = ./Ex3/ex3
 CTAGS = ./Ex1/tags ./Ex2/tags ./Ex3/tags
 EXE= ./Ex1/ex1 ./Ex2/ex2 ./Ex3/ex3
-LIBS = -lGL -lglut -lGLU
+LIBS = -lGL -lglut -lGLU -lm
 .PHONY: all Ex1 Ex2 Ex3
 
 all: Ex1 Ex2 Ex3

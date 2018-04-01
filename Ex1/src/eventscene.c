@@ -12,12 +12,11 @@ void cleanScreen(){
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(0.0,0.0,0.0);
-	glLoadIdentity();
 }
 
 void display(){
 	cleanScreen();
-
+	glPushMatrix();
 	switch(currentMode){
 		case(drawLINE):
 			drawLine(p1, p2);
@@ -32,40 +31,53 @@ void display(){
 			break;
 		case(drawIDLE):
 			printf("nothing/transform\n");
+			break;
 	}
+	currentMode=drawLINE;
+	glPopMatrix();
 	glutSwapBuffers();
 }
 
 
+/*************RESHAPE**************/
+void reshape(int w, int h){
+	//prevent divide by 0
+	if(h==0) h=1;
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	if(w<=h)
+		gluOrtho2D (0.0f, ORTHO_X, 0.0f, ORTHO_Y*h/w);
+	else
+		gluOrtho2D (0.0f, ORTHO_X*w/h, 0.0f, ORTHO_Y);
+} 
 /*************DRAWS**************/
 
 void drawLine(DOT *p1, DOT *p2){
-	glPointSize(50);
-	printf("dot1: %f %f\n", p1->x, p1->y);
-	printf("dot2: %f %f\n", p2->x, p2->y);
-
-	glBegin(GL_POINTS);
-		glVertex2f(p1->x, p1->y);
-		glVertex2f(p2->x, p2->y);
-	glEnd();
-	glFlush();
-}
-
-
-
-/*************EVENTS**************/
-
-void onClick(int bt, int state, int x, int y){
-	xMouse=x, yMouse=y, sMouse=state;
-	if(bt==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
-		if(!lockP1){
-			p1->x=xMouse, p1->y=yMouse;
-			lockP1=1;
-		}
-		else{
-			p2->x=xMouse, p2->y=yMouse;
-			lockP1=0;
-		}
+	glPointSize(10);
+	int i;
+	GLint dx= (p2->x-p1->x);
+	GLint dy= (p2->y-p1->y);
+	GLint step,xInc, yInc;
+	
+	if(abs(dx)>abs(dy)){
+		step=ceil(dy/dx);
+		glBegin(GL_POINTS);
+			for(xInc=p1->x, yInc=p1->y;
+					xInc<p2->x && yInc<p2->y;
+					xInc++, yInc+=step){
+				glVertex2i(xInc,yInc);
+			}
+		glEnd();
 	}
-	glutPostRedisplay();
+	else{
+		step=ceil(dx/dy);
+		glBegin(GL_POINTS);
+			for(xInc=p1->x, yInc=p1->y;
+					xInc<p2->x && yInc<p2->y;
+					yInc++, xInc+=step){
+				glVertex2i(xInc,yInc);
+			}
+		glEnd();
+	}
+	glFlush();
 }

@@ -1,5 +1,6 @@
 #include "../include/settings.h"
 #include "../include/eventscene.h"
+#include "../include/mouse.h"
 
 DOT extern *p1, *p2;
 dMode extern currentMode;
@@ -27,9 +28,13 @@ void init(){
 
 	glMatrixMode(GL_PROJECTION);
 	glViewport(0,0,VIEWPORT_X,VIEWPORT_Y);
-	gluOrtho2D(0,ORTHO_X, 0,ORTHO_Y);
+	glLoadIdentity();
+	gluOrtho2D(0,VIEWPORT_X, 0,VIEWPORT_Y);
 	glMatrixMode(GL_MODELVIEW);
-	currentMode=drawLINE;
+	glLoadIdentity();
+	currentMode=drawIDLE;
+	rMenu();
+
 }
 
 
