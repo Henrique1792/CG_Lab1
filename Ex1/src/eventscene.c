@@ -1,12 +1,6 @@
 #include "../include/eventscene.h"
 
 
-/*************GLOBALS**************/ 
-
-dMode extern currentMode;
-int extern lockP1;
-DOT extern *p1, *p2;
-int extern lockLine;
 /*************DISPLAY**************/ 
 void cleanScreen(){ 
 	glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -19,11 +13,23 @@ void display(){
 	cleanScreen();
 	glPushMatrix();
 
-	if(currentMode==drawLINE && lockLine)
-		drawLine(p1, p2);
-	else if(currentMode==drawTRI && lockTri)
-		drawTri(p1, p2);
-
+	switch(currentMode){
+		case(drawIDLE):
+			printf("Nothing to do\n");
+			break;
+		case(drawLINE):
+			if(lockLine)
+				drawLine(p1,p2);
+			break;
+		case(drawTRI):
+			if(lockTri)
+				drawTri(p1,p2);
+			break;
+		case(drawSQR):
+			if(lockSqr)
+				drawSqr(p1,p2);
+	}
+	
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -51,11 +57,10 @@ void drawLine(DOT *p1, DOT *p2){
 
 	GLfloat step = 0;
 
-	if(abs(dx) > abs(dy)) {
+	if(abs(dx) > abs(dy))
 		step = abs(dx);
-	} else {
+	else 
 		step = abs(dy);
-	}
 
 	GLfloat xInc = dx/step;
 	GLfloat yInc = dy/step;
@@ -71,6 +76,22 @@ void drawLine(DOT *p1, DOT *p2){
 	glFlush();
 }
 void drawTri(DOT *p1, DOT *p2){
-	printf("calling drawTRI\n");
-	
+	int l=sqrt(pow((p2->x+p1->x),2)+pow((p2->y+p1->y),2))/2;
+	p3->x=l/2;
+	p3->y=l*(sqrt(3)/2);
+	drawLine(p1,p2);
+	drawLine(p2,p3);
+	drawLine(p1,p3);
+}
+
+
+void drawSqr(DOT *p1, DOT *p2){
+	p3->x=p1->x, p3->y=p2->y;
+	p4->x=p2->x, p4->y=p1->y;
+
+	drawLine(p1,p4);
+	drawLine(p1,p3);
+	drawLine(p2,p3);
+	drawLine(p2,p4);
+	glutPostRedisplay();
 }
