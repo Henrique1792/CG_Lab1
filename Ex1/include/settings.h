@@ -39,7 +39,12 @@ typedef struct DOT{
 
 
 dMode currentMode;
-int xMouse, yMouse, sMouse, lockP1;
+int xMouse, yMouse, sMouse,bMouse;
+int lockP1, lockLine;
+int dragging;
 DOT *p1, *p2;
 
+/*
+ * inits
+*/
 #endif

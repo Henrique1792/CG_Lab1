@@ -1,7 +1,14 @@
 #ifndef EVENTSCENE_H_
 #define EVENTSCENE_H_
 #include "settings.h"
+/*
+ *
+ * DOT init/set
+ *
+*/
 
+void initDots();
+void setDots();
 /*
  *
  * display!

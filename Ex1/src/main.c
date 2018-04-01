@@ -10,11 +10,13 @@ dMode extern currentMode;
 void initDots(){
 	p1=(DOT *)malloc(sizeof(DOT));
 	p2=(DOT *)malloc(sizeof(DOT));
+	
+}
 
+void setDots(){
 	p1->x=0, p1->y=0;
 	p2->x=0, p2->y=0;
 }
-
 void freeDots(){
 	free(p1);
 	free(p2);
@@ -32,7 +34,6 @@ void init(){
 	gluOrtho2D(0,VIEWPORT_X, 0,VIEWPORT_Y);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	currentMode=drawIDLE;
 	rMenu();
 
 }
@@ -40,13 +41,15 @@ void init(){
 
 int main(int argc, char *argv[]){
 	initDots();
+	lockLine=0;
+	currentMode=drawLINE;
 	glutInit(&argc, argv);
 	init();
 	printf("Window Created\n");
 	glutDisplayFunc(display);
 	
 	glutMouseFunc(onClick);
-	
+	glutMotionFunc(onDrag);
 	glutMainLoop();
 	freeDots();
 }

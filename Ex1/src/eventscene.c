@@ -6,12 +6,13 @@
 dMode extern currentMode;
 int extern lockP1;
 DOT extern *p1, *p2;
-
+int extern lockLine;
 /*************DISPLAY**************/ 
 void cleanScreen(){ 
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(0.0,0.0,0.0);
+	glPointSize(10);
 }
 
 void display(){
@@ -19,7 +20,8 @@ void display(){
 	glPushMatrix();
 	switch(currentMode){
 		case(drawLINE):
-			drawLine(p1, p2);
+			if(lockLine)
+				drawLine(p1, p2);
 			break;
 		case(drawTRI):
 			break;
@@ -33,7 +35,6 @@ void display(){
 			printf("nothing/transform\n");
 			break;
 	}
-	currentMode=drawLINE;
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -53,31 +54,30 @@ void reshape(int w, int h){
 /*************DRAWS**************/
 
 void drawLine(DOT *p1, DOT *p2){
-	glPointSize(10);
-	int i;
-	GLint dx= (p2->x-p1->x);
-	GLint dy= (p2->y-p1->y);
-	GLint step,xInc, yInc;
-	
-	if(abs(dx)>abs(dy)){
-		step=ceil(dy/dx);
-		glBegin(GL_POINTS);
-			for(xInc=p1->x, yInc=p1->y;
-					xInc<p2->x && yInc<p2->y;
-					xInc++, yInc+=step){
-				glVertex2i(xInc,yInc);
-			}
-		glEnd();
+	GLfloat dx = p2->x - p1->x;
+	GLfloat dy = p2->y - p1->y;
+
+	GLfloat x1 = p1->x;
+	GLfloat y1 = p1->y;
+
+	GLfloat step = 0;
+
+	if(abs(dx) > abs(dy)) {
+		step = abs(dx);
+	} else {
+		step = abs(dy);
 	}
-	else{
-		step=ceil(dx/dy);
-		glBegin(GL_POINTS);
-			for(xInc=p1->x, yInc=p1->y;
-					xInc<p2->x && yInc<p2->y;
-					yInc++, xInc+=step){
-				glVertex2i(xInc,yInc);
-			}
-		glEnd();
+
+	GLfloat xInc = dx/step;
+	GLfloat yInc = dy/step;
+
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POINTS);
+	for(float i = 1; i <= step; i++) {
+		glVertex2f(x1, y1);
+		x1 += xInc;
+		y1 += yInc;
 	}
+	glEnd();
 	glFlush();
 }
