@@ -12,24 +12,23 @@ void cleanScreen(){
 void display(){
 	cleanScreen();
 	glPushMatrix();
-
 	switch(currentMode){
 		case(drawIDLE):
 			printf("Nothing to do\n");
 			break;
 		case(drawLINE):
 			if(lockLine)
-				drawLine(p1,p2);
+				drawLine(p1,p2), objectDraw=1;
 			break;
 		case(drawTRI):
 			if(lockTri)
-				drawTri(p1,p2);
+				drawTri(p1,p2), objectDraw=1;
 			break;
 		case(drawSQR):
 			if(lockSqr)
-				drawSqr(p1,p2);
+				drawSqr(p1,p2), objectDraw=1;
+			break;
 	}
-	
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -46,8 +45,8 @@ void reshape(int w, int h){
 	else
 		gluOrtho2D (0.0f, ORTHO_X*w/h, 0.0f, ORTHO_Y);
 } 
-/*************DRAWS**************/
 
+/*************DRAWS**************/
 void drawLine(DOT *p1, DOT *p2){
 	GLfloat dx = p2->x - p1->x;
 	GLfloat dy = p2->y - p1->y;
@@ -95,3 +94,4 @@ void drawSqr(DOT *p1, DOT *p2){
 	drawLine(p2,p4);
 	glutPostRedisplay();
 }
+

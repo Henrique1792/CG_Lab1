@@ -32,6 +32,13 @@ typedef struct DOT{
 	int x, y;
 
 }DOT;
+
+typedef enum tMode{
+	IDL,
+	TRL,
+	ROT,
+	SCL
+}tMode;
 /*
  * Globals Goes here!
  *
@@ -39,10 +46,12 @@ typedef struct DOT{
 
 
 dMode currentMode;
+tMode currentTransform;
 int xMouse, yMouse, sMouse,bMouse;
 int lockP1, lockLine, lockTri, lockSqr;
 int dragging;
 DOT *p1, *p2, *p3, *p4;
+int objectDraw;
 
 /*
  * inits

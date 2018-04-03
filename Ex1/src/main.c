@@ -1,6 +1,7 @@
 #include "../include/settings.h"
 #include "../include/eventscene.h"
 #include "../include/mouse.h"
+#include "../include/keyboard.h"
 
 
 void initDots(){
@@ -44,6 +45,9 @@ int main(int argc, char *argv[]){
 	initDots();
 	lockLine=0;
 	lockTri=0;
+	lockSqr=0;
+	objectDraw=0;
+
 	glutInit(&argc, argv);
 	init();
 	printf("Window Created\n");
@@ -51,6 +55,8 @@ int main(int argc, char *argv[]){
 	
 	glutMouseFunc(onClick);
 	glutMotionFunc(onDrag);
+	glutKeyboardFunc(proccessKey);
+	glutSpecialFunc(proccessSpecKey);
 	glutMainLoop();
 	freeDots();
 }

@@ -1,7 +1,7 @@
 #include "../include/mouse.h" 
 
-
-void menuSkeleton(int itemValue){
+/*************Menus**************/ 
+void menuShape(int itemValue){
 	switch(itemValue){
 		case(drawLINE):
 		case(drawTRI):
@@ -14,23 +14,44 @@ void menuSkeleton(int itemValue){
 	}
 	glutPostRedisplay();
 }
+
+void menuMain(int itemValue){
+	printf("SubMenu: %d\n", itemValue);
+}
 void rMenu(){
-	int menuId = glutCreateMenu(menuSkeleton);
+	int menuS = glutCreateMenu(menuShape);
 	glutAddMenuEntry("Linha",1);
 	glutAddMenuEntry("Triangulo",2);
 	glutAddMenuEntry("Quadrado",3);
 	glutAddMenuEntry("Circulo",4);
 	glutAddMenuEntry("Elipse",5);
 
+	int mainMenu=glutCreateMenu(menuMain);
+	glutAddSubMenu("Shape",menuS);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
+/*************onClick Event**************/ 
 void onClick(int bt, int state, int x, int y){
 	xMouse=x, yMouse=y, sMouse=state, bMouse=bt;
 	dragging=(sMouse==GLUT_DOWN);
 	switch(currentMode){
 		case(drawLINE):
+			if(bt==GLUT_LEFT_BUTTON && sMouse==GLUT_DOWN){
+					p1->x=xMouse, p1->y=VIEWPORT_Y-yMouse;
+					printf("Click: %d, %d\n", p1->x, p1->y);
+			}
+			if(currentTransform==TRL){
+				
+				
+			}
+			break;
 		case(drawTRI):
+			if(bt==GLUT_LEFT_BUTTON && sMouse==GLUT_DOWN){
+					p1->x=xMouse, p1->y=VIEWPORT_Y-yMouse;
+					printf("Click: %d, %d\n", p1->x, p1->y);
+			}
+			break;
 		case(drawSQR):
 			if(bt==GLUT_LEFT_BUTTON && sMouse==GLUT_DOWN){
 					p1->x=xMouse, p1->y=VIEWPORT_Y-yMouse;
@@ -41,9 +62,9 @@ void onClick(int bt, int state, int x, int y){
 			break;
 	}
 	glutPostRedisplay();
-
 }
 
+/*************onDrag Event**************/ 
 void onDrag(int x, int y){
 	int oldX=xMouse, oldY=yMouse;
 	switch(currentMode){
