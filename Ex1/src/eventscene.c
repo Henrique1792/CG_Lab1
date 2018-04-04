@@ -64,7 +64,7 @@ void drawLine(DOT *p1, DOT *p2){
 	GLfloat xInc = dx/step;
 	GLfloat yInc = dy/step;
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
 	glBegin(GL_POINTS);
 	for(float i = 1; i <= step; i++) {
 		glVertex2f(x1, y1);
@@ -81,6 +81,7 @@ void drawTri(DOT *p1, DOT *p2){
 	drawLine(p1,p2);
 	drawLine(p2,p3);
 	drawLine(p1,p3);
+	glutPostRedisplay();
 }
 
 
