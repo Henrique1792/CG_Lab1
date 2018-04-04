@@ -12,6 +12,7 @@ void proccessKey(unsigned char key, int x, int y){
 					scaleLine(key);
 				break;
 		}
+		glutPostRedisplay();
 	}
 }
 void proccessSpecKey(int key, int x, int y){

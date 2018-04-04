@@ -1,4 +1,5 @@
 #include "../include/mouse.h" 
+#include "../include/transforms.h"
 
 /*************Menus**************/ 
 void menuShape(int itemValue){
@@ -33,13 +34,17 @@ void rMenu(){
 
 /*************onClick Event**************/ 
 void onClick(int bt, int state, int x, int y){
-	xMouse=x, yMouse=y, sMouse=state, bMouse=bt;
+	xMouse=x, yMouse=VIEWPORT_Y-y, sMouse=state, bMouse=bt;
 	dragging=(sMouse==GLUT_DOWN);
 	switch(currentMode){
 		case(drawLINE):
 			if(bt==GLUT_LEFT_BUTTON && sMouse==GLUT_DOWN){
-					p1->x=xMouse, p1->y=VIEWPORT_Y-yMouse;
-					printf("Click: %d, %d\n", p1->x, p1->y);
+					if(objectDraw)  translateLine(xMouse, yMouse);
+					else{ 
+						objectDraw=1;
+						p1->x=xMouse, p1->y=yMouse;
+						printf("Click: %d, %d\n", p1->x, p1->y);
+					}
 			}
 			if(currentTransform==TRL){
 				
@@ -81,7 +86,6 @@ void onDrag(int x, int y){
 						lockSqr=1;
 			}
 			break;
-			
 	}
 	glutPostRedisplay();
 }

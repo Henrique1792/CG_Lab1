@@ -7,6 +7,7 @@ void cleanScreen(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(0.0,0.0,0.0);
 	glPointSize(10);
+	objectDraw=0;
 }
 
 void display(){
